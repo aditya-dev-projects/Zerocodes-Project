@@ -61,6 +61,31 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Zerocodes block colors
+				block: {
+					motion: 'hsl(var(--block-motion))',
+					looks: 'hsl(var(--block-looks))',
+					sound: 'hsl(var(--block-sound))',
+					events: 'hsl(var(--block-events))',
+					control: 'hsl(var(--block-control))',
+					sensing: 'hsl(var(--block-sensing))',
+					operators: 'hsl(var(--block-operators))',
+					variables: 'hsl(var(--block-variables))',
+					text: 'hsl(var(--block-text))',
+					border: 'hsl(var(--block-border))',
+					hover: 'hsl(var(--block-hover))',
+					active: 'hsl(var(--block-active))'
+				},
+				canvas: {
+					bg: 'hsl(var(--canvas-bg))',
+					grid: 'hsl(var(--canvas-grid))',
+					drop: 'hsl(var(--drop-zone))'
+				},
+				zerocodes: {
+					sidebar: 'hsl(var(--sidebar-bg))',
+					panel: 'hsl(var(--panel-bg))',
+					connection: 'hsl(var(--connection-line))'
 				}
 			},
 			borderRadius: {
