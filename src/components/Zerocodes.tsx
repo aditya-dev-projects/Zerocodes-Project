@@ -18,8 +18,6 @@ export const Zerocodes = () => {
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<ExecutionResult | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [apiKey, setApiKey] = useState('');
-  const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
 
   // Global function for inline input editing
   useEffect(() => {
@@ -101,17 +99,7 @@ export const Zerocodes = () => {
     setExecutionResult(null);
 
     try {
-      let service;
-      
-      if (apiKey) {
-        service = new Judge0Service(apiKey);
-      } else {
-        // Show API key dialog for real execution
-        setShowApiKeyDialog(true);
-        setIsExecuting(false);
-        return;
-      }
-
+      const service = new Judge0Service();
       const result = await service.executeCode(generatedCode, language);
       setExecutionResult(result);
       
@@ -130,7 +118,7 @@ export const Zerocodes = () => {
         const demoService = new DemoExecutionService();
         const result = await demoService.executeCode(generatedCode, language);
         setExecutionResult(result);
-        toast.info('Running in demo mode - Add your RapidAPI key for real execution');
+        toast.info('Running in demo mode - real execution failed');
       } catch (demoError) {
         toast.error('Failed to execute code');
         console.error('Demo execution error:', demoError);
@@ -167,58 +155,6 @@ export const Zerocodes = () => {
           onExecute={handleExecuteCode}
           onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         />
-
-        {/* API Key Dialog */}
-        {showApiKeyDialog && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-background border border-border rounded-lg p-6 w-96">
-              <h3 className="text-lg font-semibold mb-4">RapidAPI Key Required</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                To execute code with Judge0, you need a RapidAPI key. Get one at{' '}
-                <a 
-                  href="https://rapidapi.com/judge0-official/api/judge0-ce" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  RapidAPI Judge0
-                </a>
-              </p>
-              <input
-                type="password"
-                placeholder="Enter your RapidAPI key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded-md bg-background mb-4"
-              />
-              <div className="flex gap-2 justify-end">
-                <button
-                  onClick={() => {
-                    setShowApiKeyDialog(false);
-                    // Try demo mode
-                    handleExecuteCode();
-                  }}
-                  className="px-4 py-2 text-sm border border-border rounded-md hover:bg-muted"
-                >
-                  Use Demo Mode
-                </button>
-                <button
-                  onClick={() => {
-                    setShowApiKeyDialog(false);
-                    if (apiKey) {
-                      handleExecuteCode();
-                    }
-                  }}
-                  disabled={!apiKey}
-                  className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md 
-                           disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Execute
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </DndProvider>
   );

@@ -1,7 +1,7 @@
 import { Language, JUDGE0_LANGUAGE_IDS, ExecutionResult } from '@/types/blocks';
 
 const JUDGE0_API_URL = 'https://judge0-ce.p.rapidapi.com';
-const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY || '';
+const RAPIDAPI_KEY = '4f72256739msh988a8e8d502b0f3p163ea2jsn75b7826d4a0f';
 
 export class Judge0Service {
   private apiKey: string;
