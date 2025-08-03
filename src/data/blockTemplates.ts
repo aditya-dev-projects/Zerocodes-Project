@@ -227,6 +227,88 @@ export const blockTemplates: BlockTemplate[] = [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' }
     ],
     color: 'block-sensing'
+  },
+
+  // Syntax Elements
+  {
+    id: 'opening-brace',
+    category: 'syntax',
+    label: 'opening brace {',
+    code: {
+      c: '{',
+      python: '# {',
+      java: '{'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'closing-brace',
+    category: 'syntax',
+    label: 'closing brace }',
+    code: {
+      c: '}',
+      python: '# }',
+      java: '}'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'semicolon',
+    category: 'syntax',
+    label: 'semicolon ;',
+    code: {
+      c: ';',
+      python: '# ;',
+      java: ';'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'opening-paren',
+    category: 'syntax',
+    label: 'opening parenthesis (',
+    code: {
+      c: '(',
+      python: '(',
+      java: '('
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'closing-paren',
+    category: 'syntax',
+    label: 'closing parenthesis )',
+    code: {
+      c: ')',
+      python: ')',
+      java: ')'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'comma',
+    category: 'syntax',
+    label: 'comma ,',
+    code: {
+      c: ',',
+      python: ',',
+      java: ','
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'custom-code',
+    category: 'syntax',
+    label: 'custom code',
+    code: {
+      c: '{code}',
+      python: '{code}',
+      java: '{code}'
+    },
+    inputs: [
+      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
+    ],
+    color: 'block-extension'
   }
 ];
 

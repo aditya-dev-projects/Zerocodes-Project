@@ -7,7 +7,8 @@ export type BlockCategory =
   | 'conditionals' 
   | 'loops' 
   | 'functions' 
-  | 'operators';
+  | 'operators'
+  | 'syntax';
 
 export interface BlockTemplate {
   id: string;
