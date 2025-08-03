@@ -113,15 +113,17 @@ export const Zerocodes = () => {
     } catch (error) {
       console.error('Execution error:', error);
       
-      // Fallback to demo service
-      try {
-        const demoService = new DemoExecutionService();
-        const result = await demoService.executeCode(generatedCode, language);
-        setExecutionResult(result);
-        toast.info('Running in demo mode - real execution failed');
-      } catch (demoError) {
+      // Show specific error message if available
+      if (error instanceof Error) {
+        if (error.message.includes('HTTP error! status: 400')) {
+          toast.error('Code compilation failed - please check your syntax');
+        } else if (error.message.includes('HTTP error! status: 401')) {
+          toast.error('API key authentication failed');
+        } else {
+          toast.error(error.message);
+        }
+      } else {
         toast.error('Failed to execute code');
-        console.error('Demo execution error:', demoError);
       }
     } finally {
       setIsExecuting(false);

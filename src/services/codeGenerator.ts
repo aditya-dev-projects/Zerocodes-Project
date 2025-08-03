@@ -28,6 +28,7 @@ const generateCCode = (blocks: CodeBlock[]): string => {
   let indentLevel = 0;
   let hasIncludes = false;
   let hasMain = false;
+  let needsMainClosure = false;
   
   // First pass: add includes at the top
   blocks.forEach(block => {
@@ -58,6 +59,10 @@ const generateCCode = (blocks: CodeBlock[]): string => {
     
     if (processedCode.includes('{') && !processedCode.includes('}')) {
       indentLevel++;
+      if (block.id === 'main-function') {
+        hasMain = true;
+        needsMainClosure = true;
+      }
     }
     
     if (block.id === 'main-function') {
@@ -65,9 +70,9 @@ const generateCCode = (blocks: CodeBlock[]): string => {
     }
   });
   
-  // Auto-add main function if not present
-  if (!hasMain && blocks.some(b => b.category !== 'includes')) {
-    code = code.trimEnd() + '\n}\n';
+  // Only add closing brace if we opened a main function but didn't close it
+  if (needsMainClosure && indentLevel > 0) {
+    code += '}\n';
   }
   
   return code.trim();

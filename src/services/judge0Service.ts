@@ -17,7 +17,7 @@ export class Judge0Service {
 
     try {
       // Create submission
-      const submissionResponse = await fetch(`${JUDGE0_API_URL}/submissions?base64_encoded=false&wait=true`, {
+      const submissionResponse = await fetch(`${JUDGE0_API_URL}/submissions?base64_encoded=true&wait=true`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,22 +26,24 @@ export class Judge0Service {
         },
         body: JSON.stringify({
           language_id: JUDGE0_LANGUAGE_IDS[language],
-          source_code: code,
-          stdin: input || '',
+          source_code: btoa(code), // Base64 encode to handle UTF-8 properly
+          stdin: input ? btoa(input) : '',
           expected_output: null
         })
       });
 
       if (!submissionResponse.ok) {
-        throw new Error(`HTTP error! status: ${submissionResponse.status}`);
+        const errorText = await submissionResponse.text();
+        console.error('Judge0 API Error:', errorText);
+        throw new Error(`HTTP error! status: ${submissionResponse.status} - ${errorText}`);
       }
 
       const result = await submissionResponse.json();
       
       return {
-        stdout: result.stdout,
-        stderr: result.stderr,
-        compile_output: result.compile_output,
+        stdout: result.stdout ? atob(result.stdout) : null,
+        stderr: result.stderr ? atob(result.stderr) : null,
+        compile_output: result.compile_output ? atob(result.compile_output) : null,
         status: result.status,
         time: result.time,
         memory: result.memory
