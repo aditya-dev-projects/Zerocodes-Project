@@ -2,37 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Zerocodes Design System - Scratch-inspired visual programming platform
-All colors MUST be HSL for consistency.
+/* Zerocodes Design System - Psychologically Engaging Visual Programming
+All colors designed for maximum user engagement and addiction.
 */
 
-/* Block category colors inspired by Scratch */
+/* Addictive gradient block colors - dopamine-inducing palette */
 :root {
-  /* Programming language block colors */
-  --block-motion: 74 100% 60%;        /* Bright green for control flow */
-  --block-looks: 260 100% 65%;        /* Purple for output/display */
-  --block-sound: 290 100% 70%;        /* Magenta for input */
-  --block-events: 25 100% 65%;        /* Orange for functions */
-  --block-control: 15 100% 60%;       /* Red for conditionals */
-  --block-sensing: 200 100% 65%;      /* Blue for operators */
-  --block-operators: 120 100% 45%;    /* Dark green for variables */
-  --block-variables: 15 100% 70%;     /* Light orange for data types */
+  /* Vibrant programming block colors with gradients */
+  --block-motion: 142 76% 36%;         /* Emerald green - growth/progress */
+  --block-motion-glow: 142 76% 50%;
+  --block-looks: 271 91% 65%;          /* Electric purple - creativity */
+  --block-looks-glow: 271 91% 75%;
+  --block-sound: 315 100% 65%;         /* Hot pink - excitement */
+  --block-sound-glow: 315 100% 75%;
+  --block-events: 31 100% 65%;         /* Sunny orange - energy */
+  --block-events-glow: 31 100% 75%;
+  --block-control: 348 83% 47%;        /* Ruby red - power */
+  --block-control-glow: 348 83% 60%;
+  --block-sensing: 221 83% 53%;        /* Ocean blue - intelligence */
+  --block-sensing-glow: 221 83% 65%;
+  --block-operators: 165 84% 39%;      /* Teal - balance */
+  --block-operators-glow: 165 84% 50%;
+  --block-variables: 262 100% 75%;     /* Violet - mystery */
+  --block-variables-glow: 262 100% 85%;
+  --block-extension: 280 100% 60%;     /* Purple - extension */
+  --block-extension-glow: 280 100% 70%;
   
-  /* Canvas and UI colors */
-  --canvas-bg: 220 13% 18%;           /* Dark canvas background */
-  --canvas-grid: 220 13% 25%;         /* Subtle grid lines */
-  --sidebar-bg: 220 13% 15%;          /* Darker sidebar */
-  --panel-bg: 220 13% 20%;            /* Code panel background */
+  /* Magical gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(271 91% 65%), hsl(315 100% 65%));
+  --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(165 84% 39%));
+  --gradient-warning: linear-gradient(135deg, hsl(31 100% 65%), hsl(348 83% 47%));
+  --gradient-info: linear-gradient(135deg, hsl(221 83% 53%), hsl(271 91% 65%));
+  --gradient-canvas: linear-gradient(135deg, hsl(224 71% 4%), hsl(221 39% 11%));
   
-  /* Interactive states */
-  --block-hover: 0 0% 100% / 0.1;     /* White overlay for hover */
-  --block-active: 0 0% 0% / 0.1;      /* Dark overlay for active */
-  --drop-zone: 120 100% 50% / 0.3;    /* Green drop zone indicator */
+  /* Immersive canvas environment */
+  --canvas-bg: 224 71% 4%;             /* Deep space black */
+  --canvas-grid: 220 13% 25%;          /* Subtle constellation dots */
+  --canvas-glow: 271 91% 65% / 0.1;    /* Purple ambient glow */
+  --sidebar-bg: 221 39% 11%;           /* Rich dark sidebar */
+  --panel-bg: 222 47% 11%;             /* Elevated panel */
   
-  /* Text and borders */
-  --block-text: 0 0% 100%;            /* White text on colored blocks */
-  --block-border: 0 0% 0% / 0.2;      /* Subtle dark borders */
-  --connection-line: 220 13% 40%;     /* Connection indicators */
+  /* Addictive interaction states */
+  --block-hover: 0 0% 100% / 0.15;     /* Bright hover feedback */
+  --block-active: 271 91% 65% / 0.2;   /* Purple press feedback */
+  --drop-zone: 142 76% 50% / 0.4;      /* Vivid green drop zone */
+  --pulse-glow: 271 91% 65% / 0.6;     /* Pulsing attention grabber */
+  
+  /* High contrast readable text */
+  --block-text: 0 0% 100%;             /* Pure white for readability */
+  --block-text-shadow: 0 0% 0% / 0.8;  /* Strong text shadow */
+  --block-border: 0 0% 100% / 0.1;     /* Subtle borders */
+  --connection-line: 271 91% 65%;      /* Bright connection lines */
+  
+  /* Shadows for depth */
+  --shadow-small: 0 2px 8px hsl(0 0% 0% / 0.2);
+  --shadow-medium: 0 4px 16px hsl(0 0% 0% / 0.3);
+  --shadow-large: 0 8px 32px hsl(0 0% 0% / 0.4);
+  --shadow-glow: 0 0 24px hsl(271 91% 65% / 0.3);
 }
 
 @layer base {
@@ -130,5 +156,82 @@ All colors MUST be HSL for consistency.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+}
+
+/* Addictive animations and effects */
+@layer utilities {
+  .block-gradient {
+    background: linear-gradient(135deg, var(--bg-color), var(--bg-glow));
+    box-shadow: var(--shadow-medium), 0 0 20px var(--glow-color);
+  }
+  
+  .block-hover-effect {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .block-hover-effect:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-large), 0 0 30px var(--glow-color);
+    filter: brightness(1.1) saturate(1.2);
+  }
+  
+  .canvas-glow {
+    background: var(--gradient-canvas);
+    position: relative;
+  }
+  
+  .canvas-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, hsl(var(--canvas-glow)) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--pulse-glow));
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(var(--pulse-glow)), 0 0 60px hsl(var(--pulse-glow));
+    }
+  }
+  
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .neon-border {
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                linear-gradient(135deg, var(--glow-color), transparent) border-box;
   }
 }

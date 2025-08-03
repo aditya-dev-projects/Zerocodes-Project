@@ -15,6 +15,7 @@ export const Zerocodes = () => {
   const [language, setLanguage] = useState<Language>('c');
   const [blocks, setBlocks] = useState<CodeBlock[]>([]);
   const [generatedCode, setGeneratedCode] = useState('');
+  const [manualCode, setManualCode] = useState('');
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<ExecutionResult | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -38,6 +39,7 @@ export const Zerocodes = () => {
   useEffect(() => {
     const code = generateCode(blocks, language);
     setGeneratedCode(code);
+    setManualCode(code);
   }, [blocks, language]);
 
   const handleAddBlock = useCallback((template: BlockTemplate) => {
@@ -89,8 +91,13 @@ export const Zerocodes = () => {
     toast.success('Canvas cleared');
   }, []);
 
+  const handleCodeChange = useCallback((code: string) => {
+    setManualCode(code);
+  }, []);
+
   const handleExecuteCode = async () => {
-    if (!generatedCode.trim()) {
+    const codeToExecute = manualCode.trim() || generatedCode.trim();
+    if (!codeToExecute) {
       toast.error('No code to execute');
       return;
     }
@@ -100,7 +107,7 @@ export const Zerocodes = () => {
 
     try {
       const service = new Judge0Service();
-      const result = await service.executeCode(generatedCode, language);
+      const result = await service.executeCode(codeToExecute, language);
       setExecutionResult(result);
       
       if (result.status.id === 3) {
@@ -149,13 +156,14 @@ export const Zerocodes = () => {
         />
         
         <CodePreview
-          code={generatedCode}
+          code={manualCode || generatedCode}
           language={language}
           isExecuting={isExecuting}
           executionResult={executionResult}
           isDarkMode={isDarkMode}
           onExecute={handleExecuteCode}
           onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+          onCodeChange={handleCodeChange}
         />
       </div>
     </DndProvider>

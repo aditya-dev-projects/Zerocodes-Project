@@ -14,6 +14,7 @@ interface CodePreviewProps {
   isDarkMode: boolean;
   onExecute: () => void;
   onToggleDarkMode: () => void;
+  onCodeChange: (code: string) => void;
 }
 
 const getMonacoLanguage = (lang: Language): string => {
@@ -90,7 +91,8 @@ export const CodePreview = ({
   executionResult,
   isDarkMode,
   onExecute,
-  onToggleDarkMode
+  onToggleDarkMode,
+  onCodeChange
 }: CodePreviewProps) => {
   const editorRef = useRef(null);
 
@@ -110,29 +112,35 @@ export const CodePreview = ({
   };
 
   return (
-    <div className="w-96 h-full bg-zerocodes-panel border-l border-border flex flex-col">
+    <div className="w-96 h-full glass-effect border-l border-white/10 flex flex-col relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 animate-pulse" />
+      
       {/* Header */}
-      <div className="p-4 border-b border-border">
+      <div className="relative z-10 p-4 border-b border-white/10 bg-black/20 backdrop-blur-sm">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold text-foreground">Code Preview</h3>
+          <h3 className="text-lg font-bold text-white flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 animate-pulse" />
+            Code Editor
+          </h3>
           <div className="flex items-center gap-2">
             <button
               onClick={onToggleDarkMode}
-              className="p-2 rounded-md bg-muted hover:bg-muted/80 transition-colors"
+              className="p-2 rounded-lg glass-effect hover:bg-white/20 transition-all duration-300 hover:scale-110"
               title="Toggle theme"
             >
               {isDarkMode ? (
-                <Sun className="w-4 h-4 text-muted-foreground" />
+                <Sun className="w-4 h-4 text-yellow-400" />
               ) : (
-                <Moon className="w-4 h-4 text-muted-foreground" />
+                <Moon className="w-4 h-4 text-blue-400" />
               )}
             </button>
             <button
               onClick={downloadCode}
-              className="p-2 rounded-md bg-muted hover:bg-muted/80 transition-colors"
+              className="p-2 rounded-lg glass-effect hover:bg-white/20 transition-all duration-300 hover:scale-110"
               title="Download code"
             >
-              <Download className="w-4 h-4 text-muted-foreground" />
+              <Download className="w-4 h-4 text-green-400" />
             </button>
           </div>
         </div>
@@ -141,44 +149,62 @@ export const CodePreview = ({
           onClick={onExecute}
           disabled={isExecuting || !code.trim()}
           className={cn(
-            "w-full px-4 py-2 rounded-md font-medium transition-all duration-200",
-            "flex items-center justify-center gap-2",
+            "w-full px-4 py-3 rounded-xl font-bold transition-all duration-300",
+            "flex items-center justify-center gap-3 relative overflow-hidden",
+            "border border-white/20",
             isExecuting || !code.trim()
-              ? "bg-muted text-muted-foreground cursor-not-allowed"
-              : "bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg"
+              ? "bg-gray-600/50 text-gray-400 cursor-not-allowed"
+              : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/25 hover:scale-105 pulse-glow"
           )}
         >
-          <Play className="w-4 h-4" />
-          {isExecuting ? 'Running...' : 'Run Code'}
+          {!isExecuting && !code.trim() && <div className="absolute inset-0 shimmer-effect" />}
+          <Play className={cn("w-5 h-5", isExecuting && "animate-spin")} />
+          <span className="font-extrabold">
+            {isExecuting ? 'Executing Magic...' : 'Run Code ⚡'}
+          </span>
         </button>
       </div>
 
       {/* Code Editor */}
-      <div className="flex-1 border-b border-border">
+      <div className="flex-1 border-b border-white/10 relative">
+        <div className="absolute top-2 right-2 z-20 px-2 py-1 rounded-md glass-effect text-xs text-white/60">
+          ✏️ Editable
+        </div>
         <Editor
           value={code}
+          onChange={(value) => onCodeChange(value || '')}
           language={getMonacoLanguage(language)}
           theme={isDarkMode ? 'vs-dark' : 'light'}
           options={{
-            readOnly: true,
+            readOnly: false,
             minimap: { enabled: false },
             scrollBeyondLastLine: false,
-            fontSize: 13,
+            fontSize: 14,
             lineNumbers: 'on',
             glyphMargin: false,
-            folding: false,
+            folding: true,
             lineDecorationsWidth: 10,
             lineNumbersMinChars: 3,
-            renderLineHighlight: 'none',
+            renderLineHighlight: 'gutter',
+            cursorStyle: 'line',
+            cursorBlinking: 'smooth',
+            wordWrap: 'on',
+            fontFamily: 'JetBrains Mono, Fira Code, Monaco, Consolas, monospace',
+            fontLigatures: true,
+            smoothScrolling: true,
+            contextmenu: true,
+            selectOnLineNumbers: true,
+            automaticLayout: true,
           }}
           onMount={(editor) => {
             editorRef.current = editor;
+            editor.focus();
           }}
         />
       </div>
 
       {/* Output Panel */}
-      <div className="h-64 p-4 bg-muted/20 overflow-y-auto">
+      <div className="h-64 p-4 bg-black/30 backdrop-blur-sm overflow-y-auto relative">
         <h4 className="text-sm font-medium text-foreground mb-2">Output</h4>
         
         {!executionResult ? (
