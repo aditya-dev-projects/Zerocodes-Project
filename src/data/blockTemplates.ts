@@ -1,7 +1,7 @@
 import { BlockTemplate } from '@/types/blocks';
 
 export const blockTemplates: BlockTemplate[] = [
-  // Includes/Imports
+  // Includes/Imports  
   {
     id: 'include-stdio',
     category: 'includes',
@@ -10,6 +10,28 @@ export const blockTemplates: BlockTemplate[] = [
       c: '#include <stdio.h>',
       java: 'import java.util.Scanner;',
       python: '# No imports needed for basic I/O'
+    },
+    color: 'block-variables'
+  },
+  {
+    id: 'java-class-main',
+    category: 'includes',
+    label: 'Java Main Class',
+    code: {
+      java: 'public class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // Your code here\n    }\n}',
+      c: '// Not applicable for C',
+      python: '# Not applicable for Python'
+    },
+    color: 'block-variables'
+  },
+  {
+    id: 'python-main',
+    category: 'includes', 
+    label: 'Python Main Block',
+    code: {
+      python: 'if __name__ == "__main__":\n    # Your code here\n    pass',
+      c: '// Not applicable for C',
+      java: '// Not applicable for Java'
     },
     color: 'block-variables'
   },
@@ -293,6 +315,72 @@ export const blockTemplates: BlockTemplate[] = [
       c: ',',
       python: ',',
       java: ','
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'greater-than',
+    category: 'syntax',
+    label: 'greater than >',
+    code: {
+      c: '>',
+      python: '>',
+      java: '>'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'less-than',
+    category: 'syntax',
+    label: 'less than <',
+    code: {
+      c: '<',
+      python: '<',
+      java: '<'
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'equals',
+    category: 'syntax',
+    label: 'equals ==',
+    code: {
+      c: '==',
+      python: '==',
+      java: '=='
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'assignment',
+    category: 'syntax',
+    label: 'assignment =',
+    code: {
+      c: '=',
+      python: '=',
+      java: '='
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'opening-bracket',
+    category: 'syntax',
+    label: 'opening bracket [',
+    code: {
+      c: '[',
+      python: '[',
+      java: '['
+    },
+    color: 'block-extension'
+  },
+  {
+    id: 'closing-bracket',
+    category: 'syntax',
+    label: 'closing bracket ]',
+    code: {
+      c: ']',
+      python: ']',
+      java: ']'
     },
     color: 'block-extension'
   },

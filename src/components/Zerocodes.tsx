@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { toast } from 'sonner';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 import { Sidebar } from './Sidebar';
 import { Canvas } from './Canvas';
@@ -19,6 +21,18 @@ export const Zerocodes = () => {
   const [isExecuting, setIsExecuting] = useState(false);
   const [executionResult, setExecutionResult] = useState<ExecutionResult | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  const { user, isGuest, setGuestMode } = useAuth();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Handle guest mode from URL
+  useEffect(() => {
+    const guestParam = searchParams.get('guest');
+    if (guestParam === 'true') {
+      setGuestMode(true);
+    }
+  }, [searchParams, setGuestMode]);
 
   // Global function for inline input editing
   useEffect(() => {
@@ -96,6 +110,20 @@ export const Zerocodes = () => {
   }, []);
 
   const handleExecuteCode = async () => {
+    // Check if user is authenticated or guest
+    if (!user && !isGuest) {
+      toast.error('Please sign in to run code');
+      navigate('/auth');
+      return;
+    }
+    
+    // Prevent guests from running code
+    if (isGuest) {
+      toast.error('Please sign in to run code. Guests have limited access.');
+      navigate('/auth');
+      return;
+    }
+
     const codeToExecute = manualCode.trim() || generatedCode.trim();
     if (!codeToExecute) {
       toast.error('No code to execute');
