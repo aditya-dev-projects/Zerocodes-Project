@@ -1,407 +1,540 @@
 import { BlockTemplate } from '@/types/blocks';
 
 export const blockTemplates: BlockTemplate[] = [
-  // Includes/Imports  
+  // C Blocks
   {
-    id: 'include-stdio',
+    id: 'c-include-stdio',
     category: 'includes',
     label: '#include <stdio.h>',
-    code: {
-      c: '#include <stdio.h>',
-      java: 'import java.util.Scanner;',
-      python: '# No imports needed for basic I/O'
-    },
+    code: '#include <stdio.h>',
+    language: 'c',
     color: 'block-variables'
   },
   {
-    id: 'java-class-main',
-    category: 'includes',
-    label: 'Java Main Class',
-    code: {
-      java: 'public class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // Your code here\n    }\n}',
-      c: '// Not applicable for C',
-      python: '# Not applicable for Python'
-    },
-    color: 'block-variables'
-  },
-  {
-    id: 'python-main',
-    category: 'includes', 
-    label: 'Python Main Block',
-    code: {
-      python: 'if __name__ == "__main__":\n    # Your code here\n    pass',
-      c: '// Not applicable for C',
-      java: '// Not applicable for Java'
-    },
-    color: 'block-variables'
-  },
-  {
-    id: 'include-stdlib',
+    id: 'c-include-stdlib',
     category: 'includes',
     label: '#include <stdlib.h>',
-    code: {
-      c: '#include <stdlib.h>',
-      java: 'import java.lang.*;',
-      python: 'import sys'
-    },
+    code: '#include <stdlib.h>',
+    language: 'c',
     color: 'block-variables'
   },
-  
-  // Input/Output
   {
-    id: 'printf',
+    id: 'c-main-function',
+    category: 'functions',
+    label: 'main function',
+    code: 'int main() {',
+    language: 'c',
+    color: 'block-events'
+  },
+  {
+    id: 'c-printf',
     category: 'io',
     label: 'print message',
-    code: {
-      c: 'printf("{text}\\n");',
-      python: 'print("{text}")',
-      java: 'System.out.println("{text}");'
-    },
+    code: 'printf("{text}\n");',
     inputs: [
       { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
     ],
+    language: 'c',
     color: 'block-looks'
   },
   {
-    id: 'scanf-int',
+    id: 'c-scanf-int',
     category: 'io',
     label: 'read integer',
-    code: {
-      c: 'scanf("%d", &{var});',
-      python: '{var} = int(input())',
-      java: '{var} = scanner.nextInt();'
-    },
+    code: 'scanf("%d", &{var});',
     inputs: [
       { name: 'var', placeholder: 'number', defaultValue: 'num' }
     ],
+    language: 'c',
     color: 'block-sound'
   },
   {
-    id: 'scanf-string',
+    id: 'c-scanf-string',
     category: 'io',
     label: 'read string',
-    code: {
-      c: 'scanf("%s", {var});',
-      python: '{var} = input()',
-      java: '{var} = scanner.next();'
-    },
+    code: 'scanf("%s", {var});',
     inputs: [
       { name: 'var', placeholder: 'text', defaultValue: 'str' }
     ],
+    language: 'c',
     color: 'block-sound'
   },
-  
-  // Variables
   {
-    id: 'int-declare',
+    id: 'c-int-declare',
     category: 'variables',
     label: 'create integer',
-    code: {
-      c: 'int {name} = {value};',
-      python: '{name} = {value}',
-      java: 'int {name} = {value};'
-    },
+    code: 'int {name} = {value};',
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '0' }
     ],
+    language: 'c',
     color: 'block-operators'
   },
   {
-    id: 'string-declare',
+    id: 'c-string-declare',
     category: 'variables',
     label: 'create string',
-    code: {
-      c: 'char {name}[100] = "{value}";',
-      python: '{name} = "{value}"',
-      java: 'String {name} = "{value}";'
-    },
+    code: 'char {name}[100] = "{value}";',
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
       { name: 'value', placeholder: 'value', defaultValue: 'hello' }
     ],
+    language: 'c',
     color: 'block-operators'
   },
-  
-  // Conditionals
   {
-    id: 'if-statement',
+    id: 'c-if-statement',
     category: 'conditionals',
     label: 'if condition',
-    code: {
-      c: 'if ({condition}) {',
-      python: 'if {condition}:',
-      java: 'if ({condition}) {'
-    },
+    code: 'if ({condition}) {',
     inputs: [
       { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
     ],
+    language: 'c',
     color: 'block-control'
   },
   {
-    id: 'else-statement',
+    id: 'c-else-statement',
     category: 'conditionals',
     label: 'else',
-    code: {
-      c: '} else {',
-      python: 'else:',
-      java: '} else {'
-    },
+    code: '} else {',
+    language: 'c',
     color: 'block-control'
   },
   {
-    id: 'end-block',
-    category: 'conditionals',
-    label: 'end block',
-    code: {
-      c: '}',
-      python: '# end block',
-      java: '}'
-    },
-    color: 'block-control'
-  },
-  
-  // Loops
-  {
-    id: 'for-loop',
+    id: 'c-for-loop',
     category: 'loops',
     label: 'for loop',
-    code: {
-      c: 'for (int {var} = {start}; {var} < {end}; {var}++) {',
-      python: 'for {var} in range({start}, {end}):',
-      java: 'for (int {var} = {start}; {var} < {end}; {var}++) {'
-    },
+    code: 'for (int {var} = {start}; {var} < {end}; {var}++) {',
     inputs: [
       { name: 'var', placeholder: 'i', defaultValue: 'i' },
       { name: 'start', placeholder: '0', defaultValue: '0' },
       { name: 'end', placeholder: '10', defaultValue: '10' }
     ],
+    language: 'c',
     color: 'block-motion'
   },
   {
-    id: 'while-loop',
+    id: 'c-while-loop',
     category: 'loops',
     label: 'while loop',
-    code: {
-      c: 'while ({condition}) {',
-      python: 'while {condition}:',
-      java: 'while ({condition}) {'
-    },
+    code: 'while ({condition}) {',
     inputs: [
       { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
     ],
+    language: 'c',
     color: 'block-motion'
   },
-  
-  // Functions
   {
-    id: 'main-function',
-    category: 'functions',
-    label: 'main function',
-    code: {
-      c: 'int main() {',
-      python: 'def main():',
-      java: 'public static void main(String[] args) {'
-    },
-    color: 'block-events'
-  },
-  {
-    id: 'return-statement',
+    id: 'c-return-statement',
     category: 'functions',
     label: 'return',
-    code: {
-      c: 'return {value};',
-      python: 'return {value}',
-      java: 'return {value};'
-    },
+    code: 'return {value};',
     inputs: [
       { name: 'value', placeholder: '0', defaultValue: '0' }
     ],
+    language: 'c',
     color: 'block-events'
   },
-  
-  // Operators
   {
-    id: 'assign',
+    id: 'c-assign',
     category: 'operators',
     label: 'set variable',
-    code: {
-      c: '{var} = {value};',
-      python: '{var} = {value}',
-      java: '{var} = {value};'
-    },
+    code: '{var} = {value};',
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '10' }
     ],
+    language: 'c',
     color: 'block-sensing'
   },
   {
-    id: 'increment',
+    id: 'c-increment',
     category: 'operators',
     label: 'increment',
-    code: {
-      c: '{var}++;',
-      python: '{var} += 1',
-      java: '{var}++;'
-    },
+    code: '{var}++;',
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' }
     ],
+    language: 'c',
     color: 'block-sensing'
   },
 
-  // Syntax Elements
+  // Java Blocks
   {
-    id: 'opening-brace',
-    category: 'syntax',
-    label: 'opening brace {',
-    code: {
-      c: '{',
-      python: '# {',
-      java: '{'
-    },
-    color: 'block-extension'
+    id: 'java-scanner-import',
+    category: 'includes',
+    label: 'import java.util.Scanner',
+    code: 'import java.util.Scanner;',
+    language: 'java',
+    color: 'block-variables'
   },
+  {
+    id: 'java-class-declaration',
+    category: 'includes',
+    label: 'Java Class Declaration',
+    code: 'public class Main {',
+    language: 'java',
+    color: 'block-variables'
+  },
+  {
+    id: 'java-main-method',
+    category: 'functions',
+    label: 'Java Main Method',
+    code: 'public static void main(String[] args) {',
+    language: 'java',
+    color: 'block-events'
+  },
+  {
+    id: 'java-scanner',
+    category: 'io',
+    label: 'Java Scanner',
+    code: 'Scanner scanner = new Scanner(System.in);',
+    language: 'java',
+    color: 'block-sound'
+  },
+  {
+    id: 'java-println',
+    category: 'io',
+    label: 'print message',
+    code: 'System.out.println("{text}");',
+    inputs: [
+      { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
+    ],
+    language: 'java',
+    color: 'block-looks'
+  },
+  {
+    id: 'java-nextInt',
+    category: 'io',
+    label: 'read integer',
+    code: '{var} = scanner.nextInt();',
+    inputs: [
+      { name: 'var', placeholder: 'number', defaultValue: 'num' }
+    ],
+    language: 'java',
+    color: 'block-sound'
+  },
+  {
+    id: 'java-next',
+    category: 'io',
+    label: 'read string',
+    code: '{var} = scanner.next();',
+    inputs: [
+      { name: 'var', placeholder: 'text', defaultValue: 'str' }
+    ],
+    language: 'java',
+    color: 'block-sound'
+  },
+  {
+    id: 'java-int-declare',
+    category: 'variables',
+    label: 'create integer',
+    code: 'int {name} = {value};',
+    inputs: [
+      { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
+      { name: 'value', placeholder: 'value', defaultValue: '0' }
+    ],
+    language: 'java',
+    color: 'block-operators'
+  },
+  {
+    id: 'java-string-declare',
+    category: 'variables',
+    label: 'create string',
+    code: 'String {name} = "{value}";',
+    inputs: [
+      { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
+      { name: 'value', placeholder: 'value', defaultValue: 'hello' }
+    ],
+    language: 'java',
+    color: 'block-operators'
+  },
+  {
+    id: 'java-if-statement',
+    category: 'conditionals',
+    label: 'if condition',
+    code: 'if ({condition}) {',
+    inputs: [
+      { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
+    ],
+    language: 'java',
+    color: 'block-control'
+  },
+  {
+    id: 'java-else-statement',
+    category: 'conditionals',
+    label: 'else',
+    code: '} else {',
+    language: 'java',
+    color: 'block-control'
+  },
+  {
+    id: 'java-for-loop',
+    category: 'loops',
+    label: 'for loop',
+    code: 'for (int {var} = {start}; {var} < {end}; {var}++) {',
+    inputs: [
+      { name: 'var', placeholder: 'i', defaultValue: 'i' },
+      { name: 'start', placeholder: '0', defaultValue: '0' },
+      { name: 'end', placeholder: '10', defaultValue: '10' }
+    ],
+    language: 'java',
+    color: 'block-motion'
+  },
+  {
+    id: 'java-while-loop',
+    category: 'loops',
+    label: 'while loop',
+    code: 'while ({condition}) {',
+    inputs: [
+      { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
+    ],
+    language: 'java',
+    color: 'block-motion'
+  },
+  {
+    id: 'java-return-statement',
+    category: 'functions',
+    label: 'return',
+    code: 'return {value};',
+    inputs: [
+      { name: 'value', placeholder: '0', defaultValue: '0' }
+    ],
+    language: 'java',
+    color: 'block-events'
+  },
+  {
+    id: 'java-assign',
+    category: 'operators',
+    label: 'set variable',
+    code: '{var} = {value};',
+    inputs: [
+      { name: 'var', placeholder: 'variable', defaultValue: 'x' },
+      { name: 'value', placeholder: 'value', defaultValue: '10' }
+    ],
+    language: 'java',
+    color: 'block-sensing'
+  },
+  {
+    id: 'java-increment',
+    category: 'operators',
+    label: 'increment',
+    code: '{var}++;',
+    inputs: [
+      { name: 'var', placeholder: 'variable', defaultValue: 'x' }
+    ],
+    language: 'java',
+    color: 'block-sensing'
+  },
+
+  // Python Blocks
+  {
+    id: 'python-main-block',
+    category: 'includes',
+    label: 'Python Main Block',
+    code: 'if __name__ == "__main__":',
+    language: 'python',
+    color: 'block-variables'
+  },
+  {
+    id: 'python-print',
+    category: 'io',
+    label: 'print message',
+    code: 'print("{text}")',
+    inputs: [
+      { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
+    ],
+    language: 'python',
+    color: 'block-looks'
+  },
+  {
+    id: 'python-input-int',
+    category: 'io',
+    label: 'read integer',
+    code: '{var} = int(input())',
+    inputs: [
+      { name: 'var', placeholder: 'number', defaultValue: 'num' }
+    ],
+    language: 'python',
+    color: 'block-sound'
+  },
+  {
+    id: 'python-input-string',
+    category: 'io',
+    label: 'read string',
+    code: '{var} = input()',
+    inputs: [
+      { name: 'var', placeholder: 'text', defaultValue: 'str' }
+    ],
+    language: 'python',
+    color: 'block-sound'
+  },
+  {
+    id: 'python-int-declare',
+    category: 'variables',
+    label: 'create integer',
+    code: '{name} = {value}',
+    inputs: [
+      { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
+      { name: 'value', placeholder: 'value', defaultValue: '0' }
+    ],
+    language: 'python',
+    color: 'block-operators'
+  },
+  {
+    id: 'python-string-declare',
+    category: 'variables',
+    label: 'create string',
+    code: '{name} = "{value}"',
+    inputs: [
+      { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
+      { name: 'value', placeholder: 'value', defaultValue: 'hello' }
+    ],
+    language: 'python',
+    color: 'block-operators'
+  },
+  {
+    id: 'python-if-statement',
+    category: 'conditionals',
+    label: 'if condition',
+    code: 'if {condition}:',
+    inputs: [
+      { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
+    ],
+    language: 'python',
+    color: 'block-control'
+  },
+  {
+    id: 'python-else-statement',
+    category: 'conditionals',
+    label: 'else',
+    code: 'else:',
+    language: 'python',
+    color: 'block-control'
+  },
+  {
+    id: 'python-for-loop',
+    category: 'loops',
+    label: 'for loop',
+    code: 'for {var} in range({start}, {end}):',
+    inputs: [
+      { name: 'var', placeholder: 'i', defaultValue: 'i' },
+      { name: 'start', placeholder: '0', defaultValue: '0' },
+      { name: 'end', placeholder: '10', defaultValue: '10' }
+    ],
+    language: 'python',
+    color: 'block-motion'
+  },
+  {
+    id: 'python-while-loop',
+    category: 'loops',
+    label: 'while loop',
+    code: 'while {condition}:',
+    inputs: [
+      { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
+    ],
+    language: 'python',
+    color: 'block-motion'
+  },
+  {
+    id: 'python-return-statement',
+    category: 'functions',
+    label: 'return',
+    code: 'return {value}',
+    inputs: [
+      { name: 'value', placeholder: '0', defaultValue: '0' }
+    ],
+    language: 'python',
+    color: 'block-events'
+  },
+  {
+    id: 'python-assign',
+    category: 'operators',
+    label: 'set variable',
+    code: '{var} = {value}',
+    inputs: [
+      { name: 'var', placeholder: 'variable', defaultValue: 'x' },
+      { name: 'value', placeholder: 'value', defaultValue: '10' }
+    ],
+    language: 'python',
+    color: 'block-sensing'
+  },
+  {
+    id: 'python-increment',
+    category: 'operators',
+    label: 'increment',
+    code: '{var} += 1',
+    inputs: [
+      { name: 'var', placeholder: 'variable', defaultValue: 'x' }
+    ],
+    language: 'python',
+    color: 'block-sensing'
+  },
+
+  // Generic Blocks
   {
     id: 'closing-brace',
     category: 'syntax',
     label: 'closing brace }',
-    code: {
-      c: '}',
-      python: '# }',
-      java: '}'
-    },
+    code: '}',
+    language: 'c', // Also used by Java
     color: 'block-extension'
   },
   {
-    id: 'semicolon',
+    id: 'closing-brace-java',
     category: 'syntax',
-    label: 'semicolon ;',
-    code: {
-      c: ';',
-      python: '# ;',
-      java: ';'
-    },
+    label: 'closing brace }',
+    code: '}',
+    language: 'java',
     color: 'block-extension'
   },
   {
-    id: 'opening-paren',
-    category: 'syntax',
-    label: 'opening parenthesis (',
-    code: {
-      c: '(',
-      python: '(',
-      java: '('
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'closing-paren',
-    category: 'syntax',
-    label: 'closing parenthesis )',
-    code: {
-      c: ')',
-      python: ')',
-      java: ')'
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'comma',
-    category: 'syntax',
-    label: 'comma ,',
-    code: {
-      c: ',',
-      python: ',',
-      java: ','
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'greater-than',
-    category: 'syntax',
-    label: 'greater than >',
-    code: {
-      c: '>',
-      python: '>',
-      java: '>'
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'less-than',
-    category: 'syntax',
-    label: 'less than <',
-    code: {
-      c: '<',
-      python: '<',
-      java: '<'
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'equals',
-    category: 'syntax',
-    label: 'equals ==',
-    code: {
-      c: '==',
-      python: '==',
-      java: '=='
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'assignment',
-    category: 'syntax',
-    label: 'assignment =',
-    code: {
-      c: '=',
-      python: '=',
-      java: '='
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'opening-bracket',
-    category: 'syntax',
-    label: 'opening bracket [',
-    code: {
-      c: '[',
-      python: '[',
-      java: '['
-    },
-    color: 'block-extension'
-  },
-  {
-    id: 'closing-bracket',
-    category: 'syntax',
-    label: 'closing bracket ]',
-    code: {
-      c: ']',
-      python: ']',
-      java: ']'
-    },
-    color: 'block-extension'
+    id: 'end-block-python',
+    category: 'conditionals',
+    label: 'end block',
+    code: '# end block',
+    language: 'python',
+    color: 'block-control'
   },
   {
     id: 'custom-code',
     category: 'syntax',
     label: 'custom code',
-    code: {
-      c: '{code}',
-      python: '{code}',
-      java: '{code}'
-    },
+    code: '{code}',
     inputs: [
       { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
     ],
+    language: 'c',
+    color: 'block-extension'
+  },
+  {
+    id: 'custom-code-java',
+    category: 'syntax',
+    label: 'custom code',
+    code: '{code}',
+    inputs: [
+      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
+    ],
+    language: 'java',
+    color: 'block-extension'
+  },
+  {
+    id: 'custom-code-python',
+    category: 'syntax',
+    label: 'custom code',
+    code: '{code}',
+    inputs: [
+      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
+    ],
+    language: 'python',
     color: 'block-extension'
   }
 ];
 
-export const getBlocksByCategory = (category: string) => 
-  blockTemplates.filter(block => block.category === category);
+export const getBlocksByCategory = (category: string, language: 'c' | 'java' | 'python') => 
+  blockTemplates.filter(block => block.category === category && block.language === language);
 
 export const getBlockById = (id: string) => 
   blockTemplates.find(block => block.id === id);

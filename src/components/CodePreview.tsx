@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Play, Download, Moon, Sun, AlertCircle, Lightbulb } from 'lucide-react';
@@ -28,11 +27,21 @@ const getMonacoLanguage = (lang: Language): string => {
 
 const getStatusColor = (status: number): string => {
   switch (status) {
-    case 3: return 'text-green-400'; // Accepted
-    case 4: return 'text-red-400';   // Wrong Answer
-    case 5: return 'text-yellow-400'; // Time Limit Exceeded
-    case 6: return 'text-red-400';   // Compilation Error
-    default: return 'text-gray-400';
+    case 3: return 'text-green-600'; // Accepted
+    case 4: return 'text-red-600';   // Wrong Answer
+    case 5: return 'text-yellow-600'; // Time Limit Exceeded
+    case 6: return 'text-red-600';   // Compilation Error
+    default: return 'text-gray-600';
+  }
+};
+
+const getStatusBgColor = (status: number): string => {
+  switch (status) {
+    case 3: return 'bg-green-100 border-green-200'; // Accepted
+    case 4: return 'bg-red-100 border-red-200';   // Wrong Answer
+    case 5: return 'bg-yellow-100 border-yellow-200'; // Time Limit Exceeded
+    case 6: return 'bg-red-100 border-red-200';   // Compilation Error
+    default: return 'bg-gray-100 border-gray-200';
   }
 };
 
@@ -112,35 +121,49 @@ export const CodePreview = ({
   };
 
   return (
-    <div className="w-96 h-full glass-effect border-l border-white/10 flex flex-col relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 animate-pulse" />
-      
+    <div className={cn(
+      "w-96 h-full flex flex-col border-l",
+      isDarkMode 
+        ? "bg-gray-900 border-gray-700 text-white" 
+        : "bg-white border-gray-200 text-gray-900"
+    )}>
       {/* Header */}
-      <div className="relative z-10 p-4 border-b border-white/10 bg-black/20 backdrop-blur-sm">
+      <div className={cn(
+        "p-4 border-b",
+        isDarkMode ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-gray-50"
+      )}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 animate-pulse" />
+          <h3 className="text-lg font-semibold flex items-center gap-2">
             Code Editor
           </h3>
           <div className="flex items-center gap-2">
             <button
               onClick={onToggleDarkMode}
-              className="p-2 rounded-lg glass-effect hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              className={cn(
+                "p-2 rounded-lg border transition-colors",
+                isDarkMode 
+                  ? "border-gray-600 hover:bg-gray-700" 
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
               title="Toggle theme"
             >
               {isDarkMode ? (
-                <Sun className="w-4 h-4 text-yellow-400" />
+                <Sun className="w-4 h-4" />
               ) : (
-                <Moon className="w-4 h-4 text-blue-400" />
+                <Moon className="w-4 h-4" />
               )}
             </button>
             <button
               onClick={downloadCode}
-              className="p-2 rounded-lg glass-effect hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              className={cn(
+                "p-2 rounded-lg border transition-colors",
+                isDarkMode 
+                  ? "border-gray-600 hover:bg-gray-700" 
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
               title="Download code"
             >
-              <Download className="w-4 h-4 text-green-400" />
+              <Download className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -149,26 +172,27 @@ export const CodePreview = ({
           onClick={onExecute}
           disabled={isExecuting || !code.trim()}
           className={cn(
-            "w-full px-4 py-3 rounded-xl font-bold transition-all duration-300",
-            "flex items-center justify-center gap-3 relative overflow-hidden",
-            "border border-white/20",
+            "w-full px-4 py-3 rounded-lg font-medium transition-all",
+            "flex items-center justify-center gap-2",
             isExecuting || !code.trim()
-              ? "bg-gray-600/50 text-gray-400 cursor-not-allowed"
-              : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/25 hover:scale-105 pulse-glow"
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
           )}
         >
-          {!isExecuting && !code.trim() && <div className="absolute inset-0 shimmer-effect" />}
-          <Play className={cn("w-5 h-5", isExecuting && "animate-spin")} />
-          <span className="font-extrabold">
-            {isExecuting ? 'Executing Magic...' : 'Run Code ⚡'}
+          <Play className="w-4 h-4" />
+          <span>
+            {isExecuting ? 'Running...' : 'Run Code'}
           </span>
         </button>
       </div>
 
       {/* Code Editor */}
-      <div className="flex-1 border-b border-white/10 relative">
-        <div className="absolute top-2 right-2 z-20 px-2 py-1 rounded-md glass-effect text-xs text-white/60">
-          ✏️ Editable
+      <div className="flex-1 border-b border-gray-200 relative">
+        <div className={cn(
+          "absolute top-2 right-2 z-20 px-2 py-1 rounded text-xs",
+          isDarkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-600"
+        )}>
+          Editable
         </div>
         <Editor
           value={code}
@@ -187,13 +211,8 @@ export const CodePreview = ({
             lineNumbersMinChars: 3,
             renderLineHighlight: 'gutter',
             cursorStyle: 'line',
-            cursorBlinking: 'smooth',
             wordWrap: 'on',
             fontFamily: 'JetBrains Mono, Fira Code, Monaco, Consolas, monospace',
-            fontLigatures: true,
-            smoothScrolling: true,
-            contextmenu: true,
-            selectOnLineNumbers: true,
             automaticLayout: true,
           }}
           onMount={(editor) => {
@@ -204,31 +223,55 @@ export const CodePreview = ({
       </div>
 
       {/* Output Panel */}
-      <div className="h-64 p-4 bg-black/30 backdrop-blur-sm overflow-y-auto relative">
-        <h4 className="text-sm font-medium text-foreground mb-2">Output</h4>
+      <div className={cn(
+        "h-64 p-4 overflow-y-auto",
+        isDarkMode ? "bg-gray-800" : "bg-gray-50"
+      )}>
+        <h4 className="text-sm font-medium mb-3">
+          Output
+        </h4>
         
         {!executionResult ? (
-          <div className="text-sm text-muted-foreground italic">
+          <div className={cn(
+            "text-sm italic",
+            isDarkMode ? "text-gray-400" : "text-gray-600"
+          )}>
             Click "Run Code" to execute your program
           </div>
         ) : (
           <div className="space-y-3 text-sm">
             {/* Status */}
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">Status:</span>
-              <span className={cn("font-medium", getStatusColor(executionResult.status.id))}>
+              <span className={isDarkMode ? "text-gray-300" : "text-gray-700"}>
+                Status:
+              </span>
+              <span className={cn(
+                "px-2 py-1 rounded text-xs font-medium border",
+                getStatusColor(executionResult.status.id),
+                getStatusBgColor(executionResult.status.id)
+              )}>
                 {executionResult.status.description}
               </span>
             </div>
 
             {/* Execution Info */}
             {(executionResult.time || executionResult.memory) && (
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <div className="flex items-center gap-4 text-xs">
                 {executionResult.time && (
-                  <span>Time: {executionResult.time}s</span>
+                  <span className={cn(
+                    "px-2 py-1 rounded border",
+                    isDarkMode ? "bg-gray-700 border-gray-600 text-gray-300" : "bg-gray-100 border-gray-200 text-gray-600"
+                  )}>
+                    Time: {executionResult.time}s
+                  </span>
                 )}
                 {executionResult.memory && (
-                  <span>Memory: {executionResult.memory} KB</span>
+                  <span className={cn(
+                    "px-2 py-1 rounded border",
+                    isDarkMode ? "bg-gray-700 border-gray-600 text-gray-300" : "bg-gray-100 border-gray-200 text-gray-600"
+                  )}>
+                    Memory: {executionResult.memory} KB
+                  </span>
                 )}
               </div>
             )}
@@ -236,8 +279,15 @@ export const CodePreview = ({
             {/* Success Output */}
             {executionResult.stdout && (
               <div>
-                <div className="text-green-400 font-medium mb-1">Output:</div>
-                <pre className="bg-background p-2 rounded border text-foreground whitespace-pre-wrap text-xs font-mono">
+                <div className="text-green-600 font-medium mb-2">
+                  Output:
+                </div>
+                <pre className={cn(
+                  "p-3 rounded border text-xs font-mono whitespace-pre-wrap",
+                  isDarkMode 
+                    ? "bg-gray-900 border-gray-600 text-gray-200" 
+                    : "bg-white border-gray-200 text-gray-800"
+                )}>
                   {executionResult.stdout}
                 </pre>
               </div>
@@ -246,13 +296,15 @@ export const CodePreview = ({
             {/* Runtime Errors */}
             {executionResult.stderr && (
               <div className="space-y-2">
-                <div className="text-red-400 font-medium mb-1">Runtime Error:</div>
-                <pre className="bg-red-950/20 p-2 rounded border border-red-500/20 text-red-400 whitespace-pre-wrap text-xs font-mono">
+                <div className="text-red-600 font-medium mb-2">
+                  Runtime Error:
+                </div>
+                <pre className="bg-red-50 border border-red-200 p-3 rounded text-red-800 whitespace-pre-wrap text-xs font-mono">
                   {executionResult.stderr}
                 </pre>
-                <Alert className="border-yellow-500/20 bg-yellow-950/20">
-                  <Lightbulb className="h-4 w-4 text-yellow-400" />
-                  <AlertDescription className="text-yellow-200 text-xs">
+                <Alert className="border-yellow-200 bg-yellow-50">
+                  <Lightbulb className="h-4 w-4 text-yellow-600" />
+                  <AlertDescription className="text-yellow-800 text-xs">
                     <strong>How to fix:</strong> Runtime errors occur during program execution. Check for array bounds, null pointers, or division by zero.
                   </AlertDescription>
                 </Alert>
@@ -262,30 +314,32 @@ export const CodePreview = ({
             {/* Compilation Errors */}
             {executionResult.compile_output && (
               <div className="space-y-2">
-                <div className="text-red-400 font-medium mb-1">Compilation Error:</div>
-                <pre className="bg-red-950/20 p-2 rounded border border-red-500/20 text-red-400 whitespace-pre-wrap text-xs font-mono">
+                <div className="text-red-600 font-medium mb-2">
+                  Compilation Error:
+                </div>
+                <pre className="bg-red-50 border border-red-200 p-3 rounded text-red-800 whitespace-pre-wrap text-xs font-mono">
                   {executionResult.compile_output}
                 </pre>
                 {(() => {
                   const suggestion = getErrorSuggestion(executionResult.compile_output, language);
                   return suggestion && (
-                    <Alert className="border-blue-500/20 bg-blue-950/20">
-                      <Lightbulb className="h-4 w-4 text-blue-400" />
-                      <AlertDescription className="text-blue-200 text-xs">
+                    <Alert className="border-blue-200 bg-blue-50">
+                      <Lightbulb className="h-4 w-4 text-blue-600" />
+                      <AlertDescription className="text-blue-800 text-xs">
                         <strong>Suggestion:</strong> {suggestion}
                       </AlertDescription>
                     </Alert>
                   );
                 })()}
-                <Alert className="border-yellow-500/20 bg-yellow-950/20">
-                  <AlertCircle className="h-4 w-4 text-yellow-400" />
-                  <AlertDescription className="text-yellow-200 text-xs">
+                <Alert className="border-gray-200 bg-gray-50">
+                  <AlertCircle className="h-4 w-4 text-gray-600" />
+                  <AlertDescription className="text-gray-700 text-xs">
                     <strong>Quick Tips:</strong>
-                    <ul className="mt-1 space-y-1 text-xs">
-                      <li>• Check for missing semicolons (;) and brackets</li>
-                      <li>• Ensure all variables are declared before use</li>
-                      <li>• Verify function names and syntax</li>
-                      {language === 'c' && <li>• Make sure you have #include &lt;stdio.h&gt; for I/O functions</li>}
+                    <ul className="mt-1 space-y-1 text-xs list-disc list-inside">
+                      <li>Check for missing semicolons (;) and brackets</li>
+                      <li>Ensure all variables are declared before use</li>
+                      <li>Verify function names and syntax</li>
+                      {language === 'c' && <li>Make sure you have #include &lt;stdio.h&gt; for I/O functions</li>}
                     </ul>
                   </AlertDescription>
                 </Alert>
@@ -294,7 +348,10 @@ export const CodePreview = ({
 
             {/* No output case */}
             {!executionResult.stdout && !executionResult.stderr && !executionResult.compile_output && executionResult.status.id === 3 && (
-              <div className="text-muted-foreground text-sm italic">
+              <div className={cn(
+                "text-sm italic",
+                isDarkMode ? "text-gray-400" : "text-gray-600"
+              )}>
                 Program executed successfully with no output
               </div>
             )}

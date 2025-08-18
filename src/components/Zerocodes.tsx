@@ -9,9 +9,8 @@ import { Sidebar } from './Sidebar';
 import { Canvas } from './Canvas';
 import { CodePreview } from './CodePreview';
 import { Language, CodeBlock, BlockTemplate, ExecutionResult } from '@/types/blocks';
-import { getBlockById } from '@/data/blockTemplates';
 import { generateCode } from '@/services/codeGenerator';
-import { Judge0Service, DemoExecutionService } from '@/services/judge0Service';
+import { Judge0Service } from '@/services/judge0Service';
 
 export const Zerocodes = () => {
   const [language, setLanguage] = useState<Language>('c');

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { User, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut as firebaseSignOut } from 'firebase/auth';
 import { auth } from '@/integrations/firebase/client';
@@ -7,9 +6,9 @@ import { toast } from 'sonner';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, displayName: string, role: string) => Promise<{ error: any }>;
-  signOut: () => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, displayName: string, role: string) => Promise<{ error: Error | null }>;
+  signOut: () => Promise<{ error: Error | null }>;
   isGuest: boolean;
   setGuestMode: (isGuest: boolean) => void;
 }
@@ -43,9 +42,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Welcome back!');
       return { error: null };
-    } catch (error: any) {
-      toast.error(error.message);
-      return { error };
+    } catch (error: unknown) {
+      toast.error((error as Error).message);
+      return { error: error as Error };
     }
   };
 
@@ -55,9 +54,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // You might want to store the displayName and role in your Firestore database
       toast.success('Account created! Please check your email to verify your account.');
       return { error: null };
-    } catch (error: any) {
-      toast.error(error.message);
-      return { error };
+    } catch (error: unknown) {
+      toast.error((error as Error).message);
+      return { error: error as Error };
     }
   };
 
@@ -67,9 +66,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsGuest(false);
       toast.success('Signed out successfully');
       return { error: null };
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Error signing out');
-      return { error };
+      return { error: error as Error };
     }
   };
 

@@ -43,8 +43,7 @@ export const Sidebar = ({ language, onLanguageChange }: SidebarProps) => {
 
   const getBlocksForCategory = (category: BlockCategory) => {
     return blockTemplates.filter(block => {
-      // Filter blocks that have implementation for current language
-      return block.category === category && block.code[language];
+      return block.category === category && block.language === language;
     });
   };
 

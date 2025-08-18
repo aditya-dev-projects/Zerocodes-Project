@@ -115,7 +115,7 @@ export default function Landing() {
             </div>
             <div className="flex gap-4">
               <Link to="/auth">
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
                   Sign In
                 </Button>
               </Link>
@@ -153,8 +153,7 @@ export default function Landing() {
               <Link to="/auth">
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4 text-lg"
                 >
                   Sign Up Free
                 </Button>
