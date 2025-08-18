@@ -167,7 +167,7 @@ export const Zerocodes = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="h-screen w-full flex bg-background">
+      <div className="h-screen w-full flex bg-gradient-to-br from-slate-900 via-blue-900/20 to-slate-900">
         <Sidebar 
           language={language} 
           onLanguageChange={setLanguage}
