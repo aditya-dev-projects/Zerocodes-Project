@@ -11,7 +11,10 @@ export const generateCode = (blocks: CodeBlock[], language: Language): string =>
     if (block.language !== language) return;
 
     const codeForLanguage = block.code[language];
-    if (!codeForLanguage) return;
+    if (!codeForLanguage || typeof codeForLanguage !== 'string') {
+      console.warn(`No code found for language ${language} in block:`, block);
+      return;
+    }
     
     const processedCode = processTemplate(codeForLanguage, block.inputs);
 
@@ -35,11 +38,17 @@ export const generateCode = (blocks: CodeBlock[], language: Language): string =>
 };
 
 const processTemplate = (template: string, inputs: Record<string, string>): string => {
+  // Ensure template is a string
+  if (!template || typeof template !== 'string') {
+    console.warn('processTemplate received invalid template:', template);
+    return '';
+  }
+  
   let result = template;
 
   Object.entries(inputs).forEach(([key, value]) => {
     const placeholder = `{${key}}`;
-    result = result.replace(new RegExp(placeholder.replace('{', '\\{').replace('}', '\\}'), 'g'), value);
+    result = result.replace(new RegExp(placeholder.replace('{', '\\{').replace('}', '\\}'), 'g'), value || '');
   });
 
   return result;
