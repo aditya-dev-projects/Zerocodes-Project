@@ -6,7 +6,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-include-stdio',
     category: 'includes',
     label: '#include <stdio.h>',
-    code: '#include <stdio.h>',
+    code: {
+      c: '#include <stdio.h>'
+    },
     language: 'c',
     color: 'block-variables'
   },
@@ -14,7 +16,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-include-stdlib',
     category: 'includes',
     label: '#include <stdlib.h>',
-    code: '#include <stdlib.h>',
+    code: {
+      c: '#include <stdlib.h>'
+    },
     language: 'c',
     color: 'block-variables'
   },
@@ -22,7 +26,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-main-function',
     category: 'functions',
     label: 'main function',
-    code: 'int main() {',
+    code: {
+      c: 'int main() {'
+    },
     language: 'c',
     color: 'block-events'
   },
@@ -30,7 +36,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-printf',
     category: 'io',
     label: 'print message',
-    code: 'printf("{text}\n");',
+    code: {
+      c: 'printf("{text}\\n");'
+    },
     inputs: [
       { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
     ],
@@ -41,7 +49,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-scanf-int',
     category: 'io',
     label: 'read integer',
-    code: 'scanf("%d", &{var});',
+    code: {
+      c: 'scanf("%d", &{var});'
+    },
     inputs: [
       { name: 'var', placeholder: 'number', defaultValue: 'num' }
     ],
@@ -52,7 +62,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-scanf-string',
     category: 'io',
     label: 'read string',
-    code: 'scanf("%s", {var});',
+    code: {
+      c: 'scanf("%s", {var});'
+    },
     inputs: [
       { name: 'var', placeholder: 'text', defaultValue: 'str' }
     ],
@@ -63,7 +75,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-int-declare',
     category: 'variables',
     label: 'create integer',
-    code: 'int {name} = {value};',
+    code: {
+      c: 'int {name} = {value};'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '0' }
@@ -75,7 +89,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-string-declare',
     category: 'variables',
     label: 'create string',
-    code: 'char {name}[100] = "{value}";',
+    code: {
+      c: 'char {name}[100] = "{value}";'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
       { name: 'value', placeholder: 'value', defaultValue: 'hello' }
@@ -87,7 +103,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-if-statement',
     category: 'conditionals',
     label: 'if condition',
-    code: 'if ({condition}) {',
+    code: {
+      c: 'if ({condition}) {'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
     ],
@@ -98,7 +116,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-else-statement',
     category: 'conditionals',
     label: 'else',
-    code: '} else {',
+    code: {
+      c: '} else {'
+    },
     language: 'c',
     color: 'block-control'
   },
@@ -106,7 +126,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-for-loop',
     category: 'loops',
     label: 'for loop',
-    code: 'for (int {var} = {start}; {var} < {end}; {var}++) {',
+    code: {
+      c: 'for (int {var} = {start}; {var} < {end}; {var}++) {'
+    },
     inputs: [
       { name: 'var', placeholder: 'i', defaultValue: 'i' },
       { name: 'start', placeholder: '0', defaultValue: '0' },
@@ -119,7 +141,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-while-loop',
     category: 'loops',
     label: 'while loop',
-    code: 'while ({condition}) {',
+    code: {
+      c: 'while ({condition}) {'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
     ],
@@ -130,7 +154,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-return-statement',
     category: 'functions',
     label: 'return',
-    code: 'return {value};',
+    code: {
+      c: 'return {value};'
+    },
     inputs: [
       { name: 'value', placeholder: '0', defaultValue: '0' }
     ],
@@ -141,7 +167,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-assign',
     category: 'operators',
     label: 'set variable',
-    code: '{var} = {value};',
+    code: {
+      c: '{var} = {value};'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '10' }
@@ -153,7 +181,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'c-increment',
     category: 'operators',
     label: 'increment',
-    code: '{var}++;',
+    code: {
+      c: '{var}++;'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' }
     ],
@@ -166,7 +196,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-scanner-import',
     category: 'includes',
     label: 'import java.util.Scanner',
-    code: 'import java.util.Scanner;',
+    code: {
+      java: 'import java.util.Scanner;'
+    },
     language: 'java',
     color: 'block-variables'
   },
@@ -174,7 +206,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-class-declaration',
     category: 'includes',
     label: 'Java Class Declaration',
-    code: 'public class Main {',
+    code: {
+      java: 'public class Main {'
+    },
     language: 'java',
     color: 'block-variables'
   },
@@ -182,7 +216,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-main-method',
     category: 'functions',
     label: 'Java Main Method',
-    code: 'public static void main(String[] args) {',
+    code: {
+      java: 'public static void main(String[] args) {'
+    },
     language: 'java',
     color: 'block-events'
   },
@@ -190,7 +226,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-scanner',
     category: 'io',
     label: 'Java Scanner',
-    code: 'Scanner scanner = new Scanner(System.in);',
+    code: {
+      java: 'Scanner scanner = new Scanner(System.in);'
+    },
     language: 'java',
     color: 'block-sound'
   },
@@ -198,7 +236,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-println',
     category: 'io',
     label: 'print message',
-    code: 'System.out.println("{text}");',
+    code: {
+      java: 'System.out.println("{text}");'
+    },
     inputs: [
       { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
     ],
@@ -209,7 +249,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-nextInt',
     category: 'io',
     label: 'read integer',
-    code: '{var} = scanner.nextInt();',
+    code: {
+      java: '{var} = scanner.nextInt();'
+    },
     inputs: [
       { name: 'var', placeholder: 'number', defaultValue: 'num' }
     ],
@@ -220,7 +262,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-next',
     category: 'io',
     label: 'read string',
-    code: '{var} = scanner.next();',
+    code: {
+      java: '{var} = scanner.next();'
+    },
     inputs: [
       { name: 'var', placeholder: 'text', defaultValue: 'str' }
     ],
@@ -231,7 +275,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-int-declare',
     category: 'variables',
     label: 'create integer',
-    code: 'int {name} = {value};',
+    code: {
+      java: 'int {name} = {value};'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '0' }
@@ -243,7 +289,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-string-declare',
     category: 'variables',
     label: 'create string',
-    code: 'String {name} = "{value}";',
+    code: {
+      java: 'String {name} = "{value}";'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
       { name: 'value', placeholder: 'value', defaultValue: 'hello' }
@@ -255,7 +303,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-if-statement',
     category: 'conditionals',
     label: 'if condition',
-    code: 'if ({condition}) {',
+    code: {
+      java: 'if ({condition}) {'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
     ],
@@ -266,7 +316,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-else-statement',
     category: 'conditionals',
     label: 'else',
-    code: '} else {',
+    code: {
+      java: '} else {'
+    },
     language: 'java',
     color: 'block-control'
   },
@@ -274,7 +326,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-for-loop',
     category: 'loops',
     label: 'for loop',
-    code: 'for (int {var} = {start}; {var} < {end}; {var}++) {',
+    code: {
+      java: 'for (int {var} = {start}; {var} < {end}; {var}++) {'
+    },
     inputs: [
       { name: 'var', placeholder: 'i', defaultValue: 'i' },
       { name: 'start', placeholder: '0', defaultValue: '0' },
@@ -287,7 +341,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-while-loop',
     category: 'loops',
     label: 'while loop',
-    code: 'while ({condition}) {',
+    code: {
+      java: 'while ({condition}) {'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
     ],
@@ -298,7 +354,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-return-statement',
     category: 'functions',
     label: 'return',
-    code: 'return {value};',
+    code: {
+      java: 'return {value};'
+    },
     inputs: [
       { name: 'value', placeholder: '0', defaultValue: '0' }
     ],
@@ -309,7 +367,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-assign',
     category: 'operators',
     label: 'set variable',
-    code: '{var} = {value};',
+    code: {
+      java: '{var} = {value};'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '10' }
@@ -321,7 +381,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'java-increment',
     category: 'operators',
     label: 'increment',
-    code: '{var}++;',
+    code: {
+      java: '{var}++;'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' }
     ],
@@ -334,7 +396,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-main-block',
     category: 'includes',
     label: 'Python Main Block',
-    code: 'if __name__ == "__main__":',
+    code: {
+      python: 'if __name__ == "__main__":'
+    },
     language: 'python',
     color: 'block-variables'
   },
@@ -342,7 +406,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-print',
     category: 'io',
     label: 'print message',
-    code: 'print("{text}")',
+    code: {
+      python: 'print("{text}")'
+    },
     inputs: [
       { name: 'text', placeholder: 'Hello World', defaultValue: 'Hello World' }
     ],
@@ -353,7 +419,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-input-int',
     category: 'io',
     label: 'read integer',
-    code: '{var} = int(input())',
+    code: {
+      python: '{var} = int(input())'
+    },
     inputs: [
       { name: 'var', placeholder: 'number', defaultValue: 'num' }
     ],
@@ -364,7 +432,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-input-string',
     category: 'io',
     label: 'read string',
-    code: '{var} = input()',
+    code: {
+      python: '{var} = input()'
+    },
     inputs: [
       { name: 'var', placeholder: 'text', defaultValue: 'str' }
     ],
@@ -375,7 +445,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-int-declare',
     category: 'variables',
     label: 'create integer',
-    code: '{name} = {value}',
+    code: {
+      python: '{name} = {value}'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '0' }
@@ -387,7 +459,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-string-declare',
     category: 'variables',
     label: 'create string',
-    code: '{name} = "{value}"',
+    code: {
+      python: '{name} = "{value}"'
+    },
     inputs: [
       { name: 'name', placeholder: 'variable name', defaultValue: 'text' },
       { name: 'value', placeholder: 'value', defaultValue: 'hello' }
@@ -399,7 +473,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-if-statement',
     category: 'conditionals',
     label: 'if condition',
-    code: 'if {condition}:',
+    code: {
+      python: 'if {condition}:'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x > 5', defaultValue: 'x > 0' }
     ],
@@ -410,7 +486,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-else-statement',
     category: 'conditionals',
     label: 'else',
-    code: 'else:',
+    code: {
+      python: 'else:'
+    },
     language: 'python',
     color: 'block-control'
   },
@@ -418,7 +496,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-for-loop',
     category: 'loops',
     label: 'for loop',
-    code: 'for {var} in range({start}, {end}):',
+    code: {
+      python: 'for {var} in range({start}, {end}):'
+    },
     inputs: [
       { name: 'var', placeholder: 'i', defaultValue: 'i' },
       { name: 'start', placeholder: '0', defaultValue: '0' },
@@ -431,7 +511,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-while-loop',
     category: 'loops',
     label: 'while loop',
-    code: 'while {condition}:',
+    code: {
+      python: 'while {condition}:'
+    },
     inputs: [
       { name: 'condition', placeholder: 'x < 10', defaultValue: 'x < 10' }
     ],
@@ -442,7 +524,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-return-statement',
     category: 'functions',
     label: 'return',
-    code: 'return {value}',
+    code: {
+      python: 'return {value}'
+    },
     inputs: [
       { name: 'value', placeholder: '0', defaultValue: '0' }
     ],
@@ -453,7 +537,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-assign',
     category: 'operators',
     label: 'set variable',
-    code: '{var} = {value}',
+    code: {
+      python: '{var} = {value}'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' },
       { name: 'value', placeholder: 'value', defaultValue: '10' }
@@ -465,7 +551,9 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'python-increment',
     category: 'operators',
     label: 'increment',
-    code: '{var} += 1',
+    code: {
+      python: '{var} += 1'
+    },
     inputs: [
       { name: 'var', placeholder: 'variable', defaultValue: 'x' }
     ],
@@ -478,15 +566,20 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'closing-brace',
     category: 'syntax',
     label: 'closing brace }',
-    code: '}',
-    language: 'c', // Also used by Java
+    code: {
+      c: '}',
+      java: '}'
+    },
+    language: 'c',
     color: 'block-extension'
   },
   {
     id: 'closing-brace-java',
     category: 'syntax',
     label: 'closing brace }',
-    code: '}',
+    code: {
+      java: '}'
+    },
     language: 'java',
     color: 'block-extension'
   },
@@ -494,47 +587,15 @@ export const blockTemplates: BlockTemplate[] = [
     id: 'end-block-python',
     category: 'conditionals',
     label: 'end block',
-    code: '# end block',
+    code: {
+      python: '# end block'
+    },
     language: 'python',
     color: 'block-control'
-  },
-  {
-    id: 'custom-code',
-    category: 'syntax',
-    label: 'custom code',
-    code: '{code}',
-    inputs: [
-      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
-    ],
-    language: 'c',
-    color: 'block-extension'
-  },
-  {
-    id: 'custom-code-java',
-    category: 'syntax',
-    label: 'custom code',
-    code: '{code}',
-    inputs: [
-      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
-    ],
-    language: 'java',
-    color: 'block-extension'
-  },
-  {
-    id: 'custom-code-python',
-    category: 'syntax',
-    label: 'custom code',
-    code: '{code}',
-    inputs: [
-      { name: 'code', placeholder: 'Write your code here...', defaultValue: '' }
-    ],
-    language: 'python',
-    color: 'block-extension'
   }
 ];
 
-export const getBlocksByCategory = (category: string, language: 'c' | 'java' | 'python') => 
-  blockTemplates.filter(block => block.category === category && block.language === language);
-
-export const getBlockById = (id: string) => 
-  blockTemplates.find(block => block.id === id);
+// Function to get blocks filtered by language
+export const getBlocksByLanguage = (language: string) => {
+  return blockTemplates.filter(block => block.language === language);
+};

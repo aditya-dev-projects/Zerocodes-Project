@@ -28,15 +28,15 @@ declare global {
 // CONSTANTS & UTILITIES
 // =============================================================================
 
-const BLOCK_GRADIENTS = {
-  'block-motion': 'from-blue-500/20 to-cyan-500/20 border-blue-400/30',
-  'block-looks': 'from-green-500/20 to-emerald-500/20 border-green-400/30',
-  'block-sound': 'from-purple-500/20 to-violet-500/20 border-purple-400/30',
-  'block-events': 'from-yellow-500/20 to-orange-500/20 border-yellow-400/30',
-  'block-control': 'from-orange-500/20 to-red-500/20 border-orange-400/30',
-  'block-sensing': 'from-cyan-500/20 to-blue-500/20 border-cyan-400/30',
-  'block-operators': 'from-violet-500/20 to-purple-500/20 border-violet-400/30',
-  'block-variables': 'from-orange-500/20 to-yellow-500/20 border-orange-400/30',
+const BLOCK_COLORS = {
+  'block-motion': 'bg-emerald-600/80 border-emerald-400/50',
+  'block-looks': 'bg-purple-600/80 border-purple-400/50',
+  'block-sound': 'bg-pink-600/80 border-pink-400/50',
+  'block-events': 'bg-orange-600/80 border-orange-400/50',
+  'block-control': 'bg-red-600/80 border-red-400/50',
+  'block-sensing': 'bg-blue-600/80 border-blue-400/50',
+  'block-operators': 'bg-teal-600/80 border-teal-400/50',
+  'block-variables': 'bg-violet-600/80 border-violet-400/50',
 } as const;
 
 // =============================================================================
@@ -83,11 +83,11 @@ export const CodeBlock = ({
   // ---------------------------------------------------------------------------
   
   /**
-   * Get the appropriate gradient style for a block color
+   * Get the appropriate color style for a block color
    */
-  const getBlockGradient = (color: string): string => {
-    return BLOCK_GRADIENTS[color as keyof typeof BLOCK_GRADIENTS] || 
-           'from-gray-500/20 to-slate-500/20 border-gray-400/30';
+  const getBlockColor = (color: string): string => {
+    return BLOCK_COLORS[color as keyof typeof BLOCK_COLORS] || 
+           'bg-gray-600/80 border-gray-400/50';
   };
 
   /**
@@ -153,8 +153,8 @@ export const CodeBlock = ({
         "group relative transition-all duration-300",
         "glass-effect rounded-xl border backdrop-blur-sm",
         
-        // Dynamic gradient based on block color
-        `bg-gradient-to-r ${getBlockGradient(block.color)}`,
+        // Dynamic color based on block color
+        getBlockColor(block.color),
         
         // Drag state styles
         isDragging && "opacity-60 rotate-1 scale-105 shadow-xl",

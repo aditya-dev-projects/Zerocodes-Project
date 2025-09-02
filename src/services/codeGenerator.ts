@@ -10,7 +10,10 @@ export const generateCode = (blocks: CodeBlock[], language: Language): string =>
   sortedBlocks.forEach(block => {
     if (block.language !== language) return;
 
-    const processedCode = processTemplate(block.code, block.inputs);
+    const codeForLanguage = block.code[language];
+    if (!codeForLanguage) return;
+    
+    const processedCode = processTemplate(codeForLanguage, block.inputs);
 
     if (processedCode.includes('}') && !processedCode.includes('{')) {
       indentLevel = Math.max(0, indentLevel - 1);

@@ -28,12 +28,12 @@ All colors designed for maximum user engagement and addiction.
   --block-extension: 280 100% 60%;     /* Purple - extension */
   --block-extension-glow: 280 100% 70%;
   
-  /* Magical gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(271 91% 65%), hsl(315 100% 65%));
-  --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(165 84% 39%));
-  --gradient-warning: linear-gradient(135deg, hsl(31 100% 65%), hsl(348 83% 47%));
-  --gradient-info: linear-gradient(135deg, hsl(221 83% 53%), hsl(271 91% 65%));
-  --gradient-canvas: linear-gradient(135deg, hsl(224 71% 4%), hsl(221 39% 11%));
+/* Solid color palette */
+  --color-primary: 271 91% 65%;      /* Electric purple */
+  --color-success: 142 76% 36%;      /* Emerald green */
+  --color-warning: 31 100% 65%;      /* Sunny orange */
+  --color-info: 221 83% 53%;         /* Ocean blue */
+  --color-canvas: 224 71% 4%;        /* Deep space black */
   
   /* Immersive canvas environment */
   --canvas-bg: 224 71% 4%;             /* Deep space black */
@@ -162,9 +162,10 @@ All colors designed for maximum user engagement and addiction.
 
 /* Addictive animations and effects */
 @layer utilities {
-  .block-gradient {
-    background: linear-gradient(135deg, var(--bg-color), var(--bg-glow));
-    box-shadow: var(--shadow-medium), 0 0 20px var(--glow-color);
+  .block-solid {
+    background: hsl(var(--bg-color));
+    box-shadow: var(--shadow-medium);
+    border: 2px solid hsl(var(--bg-color) / 0.3);
   }
   
   .block-hover-effect {
@@ -177,17 +178,10 @@ All colors designed for maximum user engagement and addiction.
     filter: brightness(1.1) saturate(1.2);
   }
   
-  .canvas-glow {
-    background: var(--gradient-canvas);
+  .canvas-solid {
+    background: hsl(var(--color-canvas));
     position: relative;
-  }
-  
-  .canvas-glow::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, hsl(var(--canvas-glow)) 0%, transparent 70%);
-    pointer-events: none;
+    border: 1px solid hsl(var(--canvas-grid));
   }
   
   .pulse-glow {

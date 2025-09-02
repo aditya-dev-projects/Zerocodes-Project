@@ -90,7 +90,7 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-900 relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-10 opacity-30">
@@ -109,18 +109,18 @@ export default function Landing() {
                 <Code className="w-10 h-10 text-purple-400" />
                 <Sparkles className="w-5 h-5 text-yellow-400 absolute -top-1 -right-1 animate-pulse" />
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold text-purple-400">
                 ZEROCODES
               </h1>
             </div>
             <div className="flex gap-4">
               <Link to="/auth">
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
                   Sign In
                 </Button>
               </Link>
               <Link to="/app">
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
                   Try Now
                 </Button>
               </Link>
@@ -133,7 +133,7 @@ export default function Landing() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-6xl font-bold text-white mb-6 leading-tight">
               Visual Programming
-              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
+              <span className="block text-purple-400">
                 Made Simple
               </span>
             </h2>
@@ -145,7 +145,7 @@ export default function Landing() {
               <Link to="/app">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4 text-lg"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-8 py-4 text-lg"
                 >
                   Start Creating <ChevronRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -153,7 +153,7 @@ export default function Landing() {
               <Link to="/auth">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4 text-lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 text-lg"
                 >
                   Sign Up Free
                 </Button>
@@ -200,7 +200,7 @@ export default function Landing() {
             {useCases.map((useCase, index) => (
               <Card 
                 key={index}
-                className={`glass-effect border-white/20 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer bg-gradient-to-br ${useCase.color}`}
+                className="glass-effect border-white/20 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer bg-slate-800/50"
                 onMouseEnter={() => setIsHovered(`usecase-${index}`)}
                 onMouseLeave={() => setIsHovered(null)}
               >
@@ -258,7 +258,7 @@ export default function Landing() {
               <Link to="/auth">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4 text-lg"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-8 py-4 text-lg"
                 >
                   Get Started Free <Star className="ml-2 w-5 h-5" />
                 </Button>

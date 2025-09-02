@@ -25,6 +25,7 @@ export interface BlockTemplate {
     defaultValue?: string;
   }[];
   color: string;
+  language: Language;
 }
 
 export interface BlockInstance {
